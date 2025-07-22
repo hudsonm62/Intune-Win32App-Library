@@ -1,0 +1,1 @@
+vlc-installer.exe /S

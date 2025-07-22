@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "streetsidesoftware.code-spell-checker",
+        "github.vscode-github-actions",
+        "davidanson.vscode-markdownlint",
+        "ms-vscode.powershell",
+        "gruntfuggly.todo-tree",
+        "redhat.vscode-yaml"
+    ]
+}

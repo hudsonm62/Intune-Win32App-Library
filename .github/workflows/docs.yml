@@ -1,0 +1,52 @@
+name: Docs
+
+on:
+  push:
+    paths:
+      - "Wiki/**"
+      - "**/docs.yml" # this workflow file
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: ⚙️ Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🌌 Get Run Metadata
+        id: setup-meta
+        uses: ./.github/actions/get-metadata
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: "**/requirements.txt"
+
+      - name: 🐍 Install MkDocs
+        run: pip install -r ./Wiki/requirements.txt
+
+      - name: 📚 Build Docs
+        run: ./scripts/Build-MkDocs.ps1
+        shell: pwsh
+
+      - name: 🧪 Set Artifact Name
+        id: artifact-name
+        run: echo "name=site_${{ steps.setup-meta.outputs.short-sha }}-${{ steps.setup-meta.outputs.timestamp }}" >> "$GITHUB_OUTPUT"
+
+      - name: ⏫ Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./Wiki/site
+          name: ${{ steps.artifact-name.outputs.name }}
+          retention-days: 7
+
+      - name: ⏺ Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ steps.artifact-name.outputs.name }}

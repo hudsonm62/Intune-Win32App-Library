@@ -1,0 +1,22 @@
+# Packaged Apps
+*.intunewin
+
+# Installer files
+*.exe
+*.msi
+*.msp
+*.zip
+*.7z
+
+# Test files
+*.log
+**/testResults.xml
+**/coverage.xml
+
+# OS
+**/.DS_Store
+**/Thumbs.db
+
+# MkDocs site
+Wiki/site
+.cache

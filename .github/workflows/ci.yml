@@ -1,0 +1,25 @@
+name: CI
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⚙️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: Markdownlint CLi Action
+        uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: "**/*.md"
+          config: .markdownlint.jsonc
+
+      - name: Prettier Action
+        uses: creyD/prettier_action@v4.6
+        with:
+          prettier_options: --config .prettierrc --check .
+          dry: true
+
+      - name: PSScriptAnalyzer Action
+        run: ./scripts/Run-ScriptAnalyzer.ps1 -CI
+        shell: pwsh

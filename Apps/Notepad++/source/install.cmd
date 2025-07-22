@@ -1,0 +1,1 @@
+npp-installer.exe /S

@@ -1,0 +1,166 @@
+site_name: Win32App Library Docs
+docs_dir: src
+repo_name: Source Code
+repo_url: https://github.com/hudsonm62/Intune-Win32App-Library
+site_url: https://hudsonm62.github.io/Intune-Win32App-Library
+copyright: Copyright &copy; 2025 Hudson M.
+
+dev_addr: "127.0.0.1:8000"
+edit_uri: edit/dev/Wiki/src
+
+watch:
+  - "."
+
+nav:
+  - Home: index.md
+  - Library Automation: library-automation.md
+  - Adding Apps to Intune: adding-apps-to-intune.md
+  - Updating Win32 Apps: updating-win32apps.md
+  - Dealing with Context: dealing-with-context.md
+  - Licensing Concerns: licensing-concerns.md
+  - Contributing: contributing.md
+
+# theme stuff
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: blue grey
+      accent: indigo
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: blue grey
+      accent: indigo
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+
+  icon:
+    repo: material/github
+    share: octicons/share-android-24
+    search: material/file-search-outline
+    annotation: material/plus-circle-outline
+    logo: material/book-open-variant
+    top: material/chevron-double-up
+
+  features:
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.top
+    - navigation.tracking
+    - navigation.prune
+    #- navigation.tabs
+    - toc.follow
+    - search.suggest
+    - search.share
+    - search.highlight
+    - content.code.copy
+    - content.tooltips
+    - content.action.edit
+
+plugins:
+  - search
+  - privacy
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      cache_safe: true
+      htmlmin_opts:
+        remove_comments: true
+      js_files:
+        - assets/javascript/tablesort.js
+  - git-authors:
+      sort_authors_by: contribution
+      show_email_address: false
+      show_contribution: true
+      exclude:
+        - "index.md"
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+      fallback_to_build_date: true
+      exclude:
+        - "index.md"
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/tablesort@5.3.0/dist/tablesort.min.js
+  - assets/javascript/tablesort.js
+
+markdown_extensions:
+  # Python Markdown
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - admonition
+  - toc:
+      permalink: "~"
+      permalink_title: Link to this section..
+
+  # PyMdown Extensions
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist: # github style checkbox syntax
+      custom_checkbox: true
+  - pymdownx.emoji: # https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator:
+        !!python/name:material.extensions.emoji.to_svg ## PyMdown Highlighting
+
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+  social:
+    # GitHub Org
+    - icon: fontawesome/brands/github
+      link: https://github.com/hudsonm62/Intune-Win32App-Library
+      name: github.com/hudsonm62/Intune-Win32App-Library
+
+    # Gh Sponsors
+    - icon: octicons/sponsor-tiers-16
+      link: https://github.com/sponsors/hudsonm62
+      name: Donate!

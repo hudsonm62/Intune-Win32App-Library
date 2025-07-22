@@ -1,0 +1,1 @@
+FoxitPDFReader-Installer.exe /VERYSILENT
