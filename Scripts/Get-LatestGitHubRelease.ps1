@@ -1,10 +1,12 @@
 <#
+.DESCRIPTION
+    Gets the latest release asset for the specified repository, uses a filter scriptblock to determine the main asset for download.
 .PARAMETER Filter
-Filter script for main asset to download - i.e. { $_.name.EndsWith('arm64.msi')
+    Filter script for asset to download - i.e. { $_.name.EndsWith('arm64.msi'). Returns first found if multiple are returned.
 
 .EXAMPLE
-$x = ./Scripts/Get-LatestGitHubRelease.ps1 -Repo 'powershell/powershell' -Filter { $_.name.EndsWith('arm64.msi') }
-Invoke-RestMethod -Uri $x.DownloadURI -OutFile './powershell-arm64.msi' -Method Get -UseBasicParsing
+    $x = ./Scripts/Get-LatestGitHubRelease.ps1 -Repo 'powershell/powershell' -Filter { $_.name.EndsWith('arm64.msi') }
+    Invoke-RestMethod -Uri $x.DownloadURI -OutFile './powershell-arm64.msi' -Method Get -UseBasicParsing
 #>
 [CmdletBinding()]
 param (
@@ -23,8 +25,10 @@ $headers = @{
 [uri]$URI = "https://api.github.com/repos/$Repo/releases/latest"
 $LatestRelease = Invoke-RestMethod -Uri $URI -Headers $headers -Method Get -UseBasicParsing
 
+$FilteredAsset = ($LatestRelease.assets | Where-Object -FilterScript $Filter)[0]
+
 return @{
-    DownloadURI = ($LatestRelease.assets | Where-Object -FilterScript $Filter ).browser_download_url
+    DownloadURI = $FilteredAsset.browser_download_url
     VersionTag = $LatestRelease.tag_name
     ReleaseNotes = $LatestRelease.html_url
 }
