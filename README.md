@@ -21,9 +21,7 @@ The repo is structured to allow you to both automate your own library, or pick a
 
 See the [Template App](./Apps/_template) for the basic file structure.
 
-<!-->
-
-The below video should help you get started with the basics of using this repo as a whole:
+<!--The below video should help you get started with the basics of using this repo as a whole:
 TODO VIDEO TUT HERE
 -->
 
