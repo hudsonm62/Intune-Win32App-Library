@@ -31,7 +31,7 @@ jobs:
         run: pip install -r ./Wiki/requirements.txt
 
       - name: 📚 Build Docs
-        run: ./scripts/Build-MkDocs.ps1
+        run: ./Scripts/Build-MkDocs.ps1
         shell: pwsh
 
       - name: 🧪 Set Artifact Name
