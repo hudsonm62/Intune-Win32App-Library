@@ -6,9 +6,21 @@
 .PARAMETER ShowDownloadProgress
     Displays Progress Bar for file download.
 #>
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'argument completer')]
 param(
     [Parameter(Mandatory, ParameterSetName = 'Name', Position = 1)]
     [ValidateNotNullOrEmpty()]
+        [ArgumentCompleter({
+        param($Command, $Parameter, $WordToComplete, $CommandAst, $FakeBoundParams)
+        switch($Parameter){
+            'AppName' {
+                $AppsDirectory = Join-Path $PSScriptRoot '../Apps'
+                $Apps = Get-ChildItem -Path $AppsDirectory -Directory -Exclude '_template' -ErrorAction Stop | ForEach-Object { $_.Name }
+                $Apps | Where-Object { $_ -like "$WordToComplete*" } | ForEach-Object { "'$_'" } | Sort-Object
+            }
+            Default {}
+        }
+    })]
     [string]$AppName,
 
     [Parameter(ParameterSetName = 'Name', Position = 2)]
