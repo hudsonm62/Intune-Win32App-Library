@@ -44,7 +44,7 @@ jobs:
         run: echo "name=site_${{ steps.setup-meta.outputs.short-sha }}-${{ steps.setup-meta.outputs.timestamp }}" >> "$GITHUB_OUTPUT"
 
       - name: ⏫ Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./Wiki/site
           name: ${{ steps.artifact-name.outputs.name }}
